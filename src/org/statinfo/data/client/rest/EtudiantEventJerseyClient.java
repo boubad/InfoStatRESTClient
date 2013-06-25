@@ -8,6 +8,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import org.infostat.data.dto.EtudiantEventDTO;
+import org.infostat.data.dto.EtudiantEventsList;
 
 /**
  * Jersey REST client generated for REST resource:EtudiantEventResource
@@ -32,6 +33,7 @@ public class EtudiantEventJerseyClient {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         config.getClasses().add(EtudiantEventDTO.class);
         config.getClasses().add(EtudiantEventDTO[].class);
+        config.getClasses().add(EtudiantEventsList.class);
         client = Client.create(config);
         webResource = client.resource(BASE_URI).path("etdevt");
     }
@@ -40,6 +42,7 @@ public class EtudiantEventJerseyClient {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         config.getClasses().add(EtudiantEventDTO.class);
         config.getClasses().add(EtudiantEventDTO[].class);
+        config.getClasses().add(EtudiantEventsList.class);
         client = Client.create(config);
         webResource = client.resource(baseURI).path("etdevt");
     }
@@ -76,6 +79,14 @@ public class EtudiantEventJerseyClient {
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public void maintains_XML(Object requestEntity) throws UniformInterfaceException {
+        webResource.path("user").type(javax.ws.rs.core.MediaType.APPLICATION_XML).post(requestEntity);
+    }
+
+    public void maintains_JSON(Object requestEntity) throws UniformInterfaceException {
+        webResource.path("user").type(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(requestEntity);
+    }
+
     public void edit_XML(Object requestEntity) throws UniformInterfaceException {
         webResource.type(javax.ws.rs.core.MediaType.APPLICATION_XML).put(requestEntity);
     }
@@ -84,8 +95,7 @@ public class EtudiantEventJerseyClient {
         webResource.type(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(requestEntity);
     }
 
-    public <T> T findData_XML(Class<T> responseType, String genre, String evtid,
-            String etudiantid, String semestreid) throws UniformInterfaceException {
+    public <T> T findData_XML(Class<T> responseType, String genre, String evtid, String etudiantid, String semestreid) throws UniformInterfaceException {
         WebResource resource = webResource;
         if (genre != null) {
             resource = resource.queryParam("genre", genre);
